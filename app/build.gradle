@@ -45,6 +45,8 @@ dependencies {
     def retro_version = "2.9.0"
     implementation "com.squareup.retrofit2:retrofit:$retro_version"
     implementation "com.squareup.retrofit2:converter-gson:$retro_version"
+    //ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1"
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
