@@ -1,18 +1,27 @@
 package com.example.ejercico5modulo6.data
 
+import androidx.lifecycle.LiveData
+import com.example.ejercico5modulo6.data.local.TerrenoDAO
+import com.example.ejercico5modulo6.data.local.TerrenoEntity
 import com.example.ejercico5modulo6.data.remote.Terreno
 import com.example.ejercico5modulo6.data.remote.TerrenoAPI
 
-class Repositorio(private val terrenoAPI: TerrenoAPI) {
-    suspend fun cargarTerreno(): List<Terreno> {
+class Repositorio(private val terrenoAPI: TerrenoAPI, private val terrenoDAO: TerrenoDAO) {
+
+    fun obtenerAllTerrenos(): LiveData<List<TerrenoEntity>> = terrenoDAO.obtenerTerrenos()
+    suspend fun cargarTerreno() {
+
         val respuesta = terrenoAPI.getData()
         if (respuesta.isSuccessful) {
             val resp = respuesta.body()
-            resp?.let {
-                return it
+            resp?.let { terrenos ->
+                val terrenoEntity = terrenos.map { it.transformar() }
+                terrenoDAO.insertarTerrenoss(terrenoEntity)
             }
         }
-            return emptyList()
 
     }
+
+    fun Terreno.transformar(): TerrenoEntity =
+        TerrenoEntity(this.id, this.price, this.type, this.img)
 }

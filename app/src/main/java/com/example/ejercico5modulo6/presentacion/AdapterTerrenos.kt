@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.example.ejercico5modulo6.data.local.TerrenoEntity
 import com.example.ejercico5modulo6.data.remote.Terreno
 import com.example.ejercico5modulo6.databinding.ItemTerrenoBinding
 
@@ -11,7 +12,7 @@ import com.example.ejercico5modulo6.databinding.ItemTerrenoBinding
 
 class AdapterTerrenos: RecyclerView.Adapter<AdapterTerrenos.ItemTerrenoViewHolder>() {
     lateinit var binding: ItemTerrenoBinding
-    private val listadoItemTerrenos = mutableListOf<Terreno>()
+    private val listadoItemTerrenos = mutableListOf<TerrenoEntity>()
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemTerrenoViewHolder {
@@ -27,15 +28,15 @@ class AdapterTerrenos: RecyclerView.Adapter<AdapterTerrenos.ItemTerrenoViewHolde
         val terreno = listadoItemTerrenos[position]
         holder.bind(terreno)
     }
-    fun setData(terreno: List<Terreno>){
+    fun setData(terreno: List<TerrenoEntity>){
         this.listadoItemTerrenos.clear()
         this.listadoItemTerrenos.addAll(terreno)
         notifyDataSetChanged()
     }
 
     class ItemTerrenoViewHolder(val v: ItemTerrenoBinding):RecyclerView.ViewHolder(v.root) {
-        fun bind(terreno: Terreno){
-            v.imgTerrenos.load(terreno.img)
+        fun bind(terreno: TerrenoEntity){
+            v.imgTerrenos.load(terreno.imagen)
         }
 
     }
