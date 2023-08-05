@@ -24,4 +24,5 @@ class TerrenosVM( application: Application): AndroidViewModel (application) {
     fun getObtenerTerrenos() = viewModelScope.launch {
          repositorio.cargarTerreno()
     }
+    fun terrenooLiveData(id:String) = repositorio.getTerreno(id)
 }
